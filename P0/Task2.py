@@ -39,8 +39,8 @@ for call in calls:
 total_time = 0
 longest_number = ''
 for k, v in longest_calls.items():
-    if int(v) > total_time:
-        total_time = int(v)
+    if v > total_time:
+        total_time = v
         longest_number = k
 
 print(f'{longest_number} spent the longest time, {total_time} seconds, on the phone during September 2016.')

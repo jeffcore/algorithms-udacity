@@ -54,7 +54,7 @@ def get_code(number):
     finds and returns area code in phone number
     """   
     if number[0] == '(':
-        code =  re.match('^\(.*\)', number)
+        code = re.match('^\(.*\)', number)
         return code[0]
     elif number[0:3] == '140':
         return number[:3]
@@ -74,6 +74,7 @@ def is_bangalore_code(phone):
 area_codes = set()
 total_sender_bang_calls = 0
 total_reciever_bang_calls = 0
+
 for call in calls:
     if is_bangalore_code(call[0]):
         total_sender_bang_calls += 1

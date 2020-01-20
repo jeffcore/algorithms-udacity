@@ -45,7 +45,6 @@ for text in texts:
         outgoing_numbers.remove(text[1])
 
 # numbers remaining in set will be telemarketers
-
 print('These numbers could be telemarketers:')
 for number in sorted(outgoing_numbers):
     print(number)
