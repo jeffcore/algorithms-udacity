@@ -3,7 +3,6 @@ For the printing of the first record, the complexity: O(1)
 For the printing of the last record, the complexity is also:  O(1)
 Result: O(1) + O(1) = O(1)
 
-
 Task1.py
 Create set: O(1)
 Loop through call array: O(N)
@@ -40,23 +39,21 @@ Sort the set: O(N log N)
 Print the set O(N)
 Result: O(8N + 3) + O(N LOG N) = O(N LOG N)
 
-
 Task4.py
 Create outgoing_numbers set: O(1)
 Loop through calls: O(N)
 Add call to outgoing_numbers set: O(1)
 Loop through calls array: O(N)
-if statement check if call is in set: O(N)
+if statement check if call is in set: O(1)
 Remove number from set: O(1)
 Loop through text array: O(N)
-if statement check if text sender number is in set: O(N)
+if statement check if text sender number is in set: O(1)
 Remove number from set: O(1)
-if statement check if text receiver number is in set: O(N)
+if statement check if text receiver number is in set: O(1)
 Remove number from set: O(1)
 Sort outgoing_numbers set(the final set will never be larger than N): O(N LOG N)  
 Loop outgoing_numbers set: O(N)
-Result: 1 + O(N + 1) + O(N * N + 1) + O(N * 2N + 2) + O(N LOG N) + O(N) =  O(N^2)    
-
+Result: 1 + O(N + 1) + O(N + 2) + O(N + 4) + O(N LOG N) + O(N) =  O(N LOG N)   
 
 References:
 https://www.ics.uci.edu/~pattis/ICS-33/lectures/complexitypython.txt
