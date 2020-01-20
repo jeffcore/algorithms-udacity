@@ -55,7 +55,7 @@ if statement check if text receiver number is in set: O(N)
 Remove number from set: O(1)
 Sort outgoing_numbers set(the final set will never be larger than N): O(N LOG N)  
 Loop outgoing_numbers set: O(N)
-Result: 1 + O(N + 1) + O(N * N + 1) + O(N * 2N + 2) + O(N LOG N) + O(N) =  O(N2)    
+Result: 1 + O(N + 1) + O(N * N + 1) + O(N * 2N + 2) + O(N LOG N) + O(N) =  O(N^2)    
 
 
 References:
