@@ -41,13 +41,39 @@ class LinkedList:
 
         return size
 
+    def to_list(self):
+        the_list = []
+        
+        current = self.head
+
+        while current:
+            the_list.append(current.value)
+            current = current.next
+        
+        return the_list
+
+
+
 def union(llist_1, llist_2):
     # Your Solution Here
-    pass
+    list1 = set(llist_1.to_list())
+    list2 = set(llist_2.to_list())
+
+    u_list = list1.union(list2)
+
+    return u_list
 
 def intersection(llist_1, llist_2):
     # Your Solution Here
-    pass
+    list1 = set(llist_1.to_list())
+    list2 = set(llist_2.to_list())
+
+    u_list = list1.intersection(list2)
+    if len(u_list):
+        return u_list
+    else:
+        return None
+
 
 
 # Test case 1

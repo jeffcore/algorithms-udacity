@@ -38,4 +38,22 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-    return None
+    print('got here')
+   
+    print(f'grpup get users {group.get_users()}')
+    for u in group.get_users():
+        print(f'u {u} user {user}')
+        if u == user:
+            return True
+            
+    print(f'grpup get grups {group.get_groups()}')
+    for g in group.get_groups():
+        if is_user_in_group(user, g):
+            return True 
+        
+    return False
+
+    
+
+
+print(is_user_in_group(sub_child_user, parent))
