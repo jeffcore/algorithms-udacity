@@ -13,14 +13,12 @@ def huffman_encoding(data):
         item3 = item1[1] + item2[1]
         
         new_node = Node(item3)
-        if isinstance(item1[0], Node):
-            # print('is node')
+        if isinstance(item1[0], Node):           
             new_node.left = item1[0]        
         else:            
             new_node.left = Node(item1[1], item1[0])
         
-        if isinstance(item2[0], Node):
-            # print('is node')
+        if isinstance(item2[0], Node):            
             new_node.right = item2[0]        
         else:
             new_node.right = Node(item2[1], item2[0])
@@ -34,11 +32,86 @@ def huffman_encoding(data):
         freq.insert(idx, (new_node, item3))
         print(freq)
 
-        # print(f'item3 = {item3}')
-    huffman_tree = Tree(freq[0][0])
-    return "", huffman_tree
+       
+    huffman_tree = Tree(freq[0][0])    
+    encoding_map = huffman_encoder_map(huffman_tree.root)
+    the_bits = huffman_string_to_bits(encoding_map, data)
 
+    return the_bits, huffman_tree
 
+def huffman_encoder_map(root, string = '', char_map={}):
+    if not root:
+        return
+
+    if not root.left and not root.right:
+        char_map[root.character] = string
+    
+    huffman_encoder_map(root.left, string + '0', char_map)
+    huffman_encoder_map(root.right, string + '1', char_map)
+    
+    return char_map
+
+def huffman_string_to_bits(char_map, data):
+    output = ''
+    for char in data:
+        output += char_map[char]
+    return output
+
+def huffman_decoding(data,tree):
+    output = ''
+    node = tree.root
+    for bit in data:
+        if bit == '0':
+            node = node.left
+        else:
+            node = node.right
+        
+        if node.character:
+            output += node.character
+            node = tree.root
+    return output
+
+def get_frequencies(data):
+    freq = {}
+    for c in data:
+        if c in freq:
+            freq[c] += 1            
+        else:
+            freq[c] = 1
+
+    # sort frequencies
+    freq = {k: v for k, v in sorted(freq.items(), key=lambda item: item[1])}  
+    # convert freqeunciies to list of tuples
+    freq_list = [(k, v) for k, v in freq.items()] 
+
+    return freq_list
+
+class Node():
+    def __init__(self, value, character = None):
+        self.value = value
+        self.character = character
+        self.left = None
+        self.right = None
+
+    def __str__(self):
+       return f'value {self.value} char {self.character}'
+
+    def __repr__(self):
+       return f'value {self.value} char {self.character}'
+    
+    def has_left_child(self):
+        return self.left != None
+    
+    def has_right_child(self):
+        return self.right != None
+    
+    def get_left_child(self):
+        return self.left
+    
+    def get_right_child(self):
+        return self.right
+
+# used for printing out tree
 class Queue():
     def __init__(self):
         self.q = deque()
@@ -114,78 +187,26 @@ class Tree:
             else:
                 s += "\n" + str(node)
                 previous_level = level
-                                
+
         return s
 
-
-def huffman_decoding(data,tree):
-    pass
-
-def get_frequencies(data):
-    freq = {}
-    for c in data:
-        if c in freq:
-            freq[c] += 1            
-        else:
-            freq[c] = 1
-
-    freq = {k: v for k, v in sorted(freq.items(), key=lambda item: item[1])}  
-    freq_list = [(k, v) for k, v in freq.items()] 
-
-    return freq_list
-
-def sort_frequencies(freq):
-      
-    return freq
-
-class Node():
-    def __init__(self, value, character = None):
-        self.value = value
-        self.character = character
-        self.left = None
-        self.right = None
-
-    def __str__(self):
-       return f'value {self.value} char {self.character}'
-
-    def __repr__(self):
-       return f'value {self.value} char {self.character}'
-    
-    def has_left_child(self):
-        return self.left != None
-    
-    def has_right_child(self):
-        return self.right != None
-    
-    def get_left_child(self):
-        return self.left
-    
-    def get_right_child(self):
-        return self.right
-
-
-
 if __name__ == "__main__":
-    codes = {}
-
+  
     a_great_sentence = "The bird is the word"
 
     print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
     print ("The content of the data is: {}\n".format(a_great_sentence))
 
     encoded_data, tree = huffman_encoding(a_great_sentence)
+ 
+    print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+
+    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+
     print(tree)
+    print('encoded data ' , encoded_data)
     print(tree.print_tree_inorder())
-
-    ## to do 
-    # got the tree working
-    # now have to figure out how to get depth of characters for opfman
-
-
-    # print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    # print ("The content of the encoded data is: {}\n".format(encoded_data))
-
-    # decoded_data = huffman_decoding(encoded_data, tree)
-
-    # print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    # print ("The content of the encoded data is: {}\n".format(decoded_data))
