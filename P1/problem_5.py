@@ -1,4 +1,7 @@
+## Blockchain ##
 import hashlib
+
+# TODO:  finish gmt timestamp
 
 class Block:
 
@@ -35,10 +38,21 @@ class BlockChain:
             print(current.data , ' ' , current.hash)
             current = current.previous_hash
 
+# Test 1 - Block
+block = Block(None, "testdata", None)
+print(f'should have hash: 810ff2fb242a5dee4220f2cb0e6a519891fb67f2f828a6cab4ef8894633b1f50 Result {block.hash}')
+assert('810ff2fb242a5dee4220f2cb0e6a519891fb67f2f828a6cab4ef8894633b1f50' == block.hash)
 
+# Test 2 - Blockchain
 bc = BlockChain()
+bc.insert('bombtrack')
+bc.insert('bombtrack 2')
+bc.insert('bombtrack 3')
+print(f'''Results Should look like this (tail to head):\nbombtrack 3   93b230233bf70deb04d6146a723aaab6be0ef60cb37a4dbaf57aede3f5429621 
+bombtrack 2   4a2869f2995757581b6db2068087aa40080c211cbd83d4689eddaced2560a205
+bombtrack   5ef78230e321d7fd562e6d517e4749a50d8f3ae65c9e7870ab8c645cded8e613''')
 
-bc.insert('this is the bomb')
-bc.insert('this is the bomb 2')
-bc.insert('this is the bomb 3')
+print('Results:')
 bc.print()
+
+# Test 3 - 

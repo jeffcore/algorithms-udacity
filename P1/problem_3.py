@@ -1,3 +1,4 @@
+### huffman encoding ###
 import sys
 from collections import deque
 
@@ -32,7 +33,6 @@ def huffman_encoding(data):
         freq.insert(idx, (new_node, item3))
         print(freq)
 
-       
     huffman_tree = Tree(freq[0][0])    
     encoding_map = huffman_encoder_map(huffman_tree.root)
     the_bits = huffman_string_to_bits(encoding_map, data)
@@ -69,6 +69,7 @@ def huffman_decoding(data,tree):
         if node.character:
             output += node.character
             node = tree.root
+
     return output
 
 def get_frequencies(data):
