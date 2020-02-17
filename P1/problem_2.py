@@ -49,13 +49,3 @@ assert(find_files('.c','testdir_wrong') == solution), 'Did not work - Incorrect 
 # Test 3 - Find Different File Extension .h
 solution = ['./testdir/subdir3/subsubdir1/b.h', './testdir/subdir5/a.h', './testdir/t1.h', './testdir/subdir1/a.h']
 assert(find_files('.h','testdir') == solution), 'Did not work - Find Different File Extension .h'
-
-# Let us print the files in the directory in which you are running this script
-# print('test')
-# print (os.listdir("./testdir"))
-
-# # Let us check if this file is indeed a file!
-# print (os.path.isfile("./ex.py"))
-
-# # Does the file end with .py?
-# print ("./ex.py".endswith(".py"))
