@@ -21,7 +21,6 @@ class Group(object):
     def get_name(self):
         return self.name
 
-
 def is_user_in_group(user, group):
     """
     Return True if user is in the group, False otherwise.
@@ -47,6 +46,7 @@ def is_user_in_group(user, group):
     return False
 
 # Test Group Class
+print('Test 1: Test Group Class')
 parent = Group("parent")
 print(f'Group parent should have name: parent Result: {parent.get_name()}')
 assert('parent' == parent.get_name())
@@ -60,6 +60,7 @@ print(f'Group parent should have one group called:  humanoids Result: {parent.ge
 assert(['humanoids'] == parent.get_groups())
 
 # Test case 2 -  In Group
+print('Test 2: Test Child in Group')
 parent = Group("parent")
 child = Group("child")
 sub_child = Group("subchild")
@@ -73,6 +74,7 @@ print(f'should return True - Result: {is_user_in_group(sub_child_user, parent)}'
 assert(True == is_user_in_group(sub_child_user, parent))
 
 # Test case 3 - Not In Group
+print('Test 3: Test Not In Group')
 parent = Group("parent")
 child = Group("child")
 sub_child = Group("subchild")
@@ -87,3 +89,11 @@ sub_child_user_not = 'sub_not_in_group'
 
 print(f'should return False - Result: {is_user_in_group(sub_child_user_not, parent)}')
 assert(False == is_user_in_group(sub_child_user_not, parent))
+
+# Test 4 - None child provided to is_user_in_group()
+print('Test 4 - None child provided is_user_in_group()')
+parent = Group("parent")
+child_user = "sub_child_user"
+parent.add_user(child_user)
+print(f'should return False - Result: {is_user_in_group(None, parent)}')
+assert(False == is_user_in_group(None, parent))

@@ -48,7 +48,7 @@ def huffman_encoding(data):
     huffman_tree = Tree(freq[0][0])  
     # get map of bits to characters in tree  
     encoding_map = huffman_encoder_map(huffman_tree.root)
-    # take encoder map to build bit strings
+    # take encoder map to build bit string
     the_bits = huffman_string_to_bits(encoding_map, data)
 
     return the_bits, huffman_tree
@@ -91,8 +91,8 @@ def huffman_decoding(data, tree):
 
     return output
 
-def get_frequencies(data):
-    # build character frequencies from data
+# build character frequencies from data
+def get_frequencies(data): 
     freq = {}
     for c in data:
         if c in freq:
@@ -211,49 +211,51 @@ class Tree:
 
         return s
 
-if __name__ == "__main__":
-  
-    a_great_sentence = "TT"
 
-    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
-    print ("The content of the data is: {}\n".format(a_great_sentence))
+# Test 1 - Entire process works
+print('Test 1 - Entire process works')
+a_great_sentence = "The bird is the word"
+encoded_data, tree = huffman_encoding(a_great_sentence)
+print(f'encoded data: {encoded_data} - should equal: 0110111011111100111000001010110000100011010011110111111010101011001010')
+assert(encoded_data == '0110111011111100111000001010110000100011010011110111111010101011001010')
+decoded_data = huffman_decoding(encoded_data, tree)
+print(f'decoded data: {decoded_data} - should equal: The bird is the word')
+assert(decoded_data == "The bird is the word")
 
-    encoded_data, tree = huffman_encoding(a_great_sentence)
-    print(tree)
-    print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    print ("The content of the encoded data is: {}\n".format(encoded_data))
+# Test 2 - blank arguments
+print('Test 2 - Blank arguments')
+# encoding function
+encoded_data, tree = huffman_encoding('')
+print(f'encoding function should return: (0, None) Results: {huffman_encoding("")}')
+assert(huffman_encoding('') == (0, None))
+# decoding function
+print(f'decoding function should return: "" Results: "{huffman_decoding("", None)}"')
+assert(huffman_decoding('', None) == '')
 
-    decoded_data = huffman_decoding(encoded_data, tree)
+# Test 3 -  String with with frequency length of one
+print('Test 3 - String with with frequency length of one')
+a_great_sentence = "TT"
+encoded_data, tree = huffman_encoding(a_great_sentence)
+print(f'encoded data: {encoded_data} - should equal: 00')
+assert(encoded_data == '00')
+decoded_data = huffman_decoding(encoded_data, tree)
+print(f'decoded data: {decoded_data} - should equal: TT')
+assert(decoded_data == "TT")
 
-    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print ("The content of the encoded data is: {}\n".format(decoded_data))
-    
-    # Test 1 - Entire process works
-    print('Test 1:')
-    a_great_sentence = "The bird is the word"
-    encoded_data, tree = huffman_encoding(a_great_sentence)
-    print(f'encoded data: {encoded_data} - should equal: 0110111011111100111000001010110000100011010011110111111010101011001010')
-    assert(encoded_data == '0110111011111100111000001010110000100011010011110111111010101011001010')
-    decoded_data = huffman_decoding(encoded_data, tree)
-    print(f'decoded data: {decoded_data} - should equal: The bird is the word')
-    assert(decoded_data == "The bird is the word")
+# Test 4 - Test from provided code
+print('Test 4 - Test from provided code')
+a_great_sentence = "The bird is the word"
 
-    # Test 2 - blank arguments
-    print('Test 2:')
-    # encoding function
-    encoded_data, tree = huffman_encoding('')
-    print(f'encoding function should return: (0, None) Results: {huffman_encoding("")}')
-    assert(huffman_encoding('') == (0, None))
-    # decoding function
-    print(f'decoding function should return: "" Results: "{huffman_decoding("", None)}"')
-    assert(huffman_decoding('', None) == '')
+print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+print ("The content of the data is: {}\n".format(a_great_sentence))
 
-    # Test 3 -  String with with frequency length of one
-    print('Test 3:')
-    a_great_sentence = "TT"
-    encoded_data, tree = huffman_encoding(a_great_sentence)
-    print(f'encoded data: {encoded_data} - should equal: 0110111011111100111000001010110000100011010011110111111010101011001010')
-    assert(encoded_data == '0110111011111100111000001010110000100011010011110111111010101011001010')
-    decoded_data = huffman_decoding(encoded_data, tree)
-    print(f'decoded data: {decoded_data} - should equal: The bird is the word')
-    assert(decoded_data == "The bird is the word")
+encoded_data, tree = huffman_encoding(a_great_sentence)
+
+print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+print ("The content of the encoded data is: {}\n".format(encoded_data))
+
+decoded_data = huffman_decoding(encoded_data, tree)
+
+print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+print ("The content of the encoded data is: {}\n".format(decoded_data))
+
