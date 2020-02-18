@@ -45,6 +45,7 @@ class BlockChain:
             current = current.previous_hash
 
 # Test 1 - Creation of Block and Hash
+print('Test 1 - Creation of Block and Hash')
 block = Block(1581877632.248518, "testdata", None)
 print(f'should have a successful hash: {block.hash}')
 assert('9eaf44d0a9f68275a7339a245b5682c51081247c77142acb59a264a7f25f9ceb' == block.hash)
@@ -53,6 +54,7 @@ print(f'should have a successful hash: {block2.hash}')
 assert('12ad9fba49724be9df0bf4550e8b70a28310f9a14a3aa7af078291990c526a3b' == block2.hash)
 
 # Test 2 - Creation of Blockchain
+print('Test 2 - Creation of Blockchain')
 bc = BlockChain()
 bc.insert('block 1')
 bc.insert('block 2')
@@ -66,5 +68,6 @@ assert(bc.tail.previous_hash.data == 'block 2')
 assert(bc.tail.previous_hash.previous_hash.data == 'block 1')
 
 # Test 3 - Check last block has none previous hash
+print('Test 3 - Check last block has none previous hash')
 block1 = bc.tail.previous_hash.previous_hash
 assert(block1.previous_hash == None)

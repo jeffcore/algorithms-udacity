@@ -4,4 +4,4 @@ I used a doubly linked list for the data structure to hold the key and value dat
 
 I used a python dictionary as the cache data structure which consists of key:node, this is used to provide a O(1) lookup to find nodes in the doubly linked list. Adding and getting an element from the cache is O(1).
 
-Space complexity is O(N) for the linked list and O(N) for the dictionary.
+Space complexity is O(2n) for the linked list and dictionary.
