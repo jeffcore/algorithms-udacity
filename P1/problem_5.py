@@ -8,6 +8,7 @@ class Block:
         self.data = data
         self.previous_hash = previous_hash
         self.hash = self.calc_hash()      
+        self.prev = None
 
     def calc_hash(self):
         sha = hashlib.sha256()
@@ -28,9 +29,10 @@ class BlockChain:
         if self.tail == None:
             self.tail = new_block
         else:
-            previous_tail = self.tail
+            new_block.previous_hash = self.tail.hash
+            previous_tail = self.tail            
             self.tail = new_block
-            new_block.previous_hash = previous_tail
+            new_block.prev = previous_tail
 
     def print(self):
         current = self.tail
@@ -38,11 +40,11 @@ class BlockChain:
             print('Block ' , current.data)
             print('Timestamp: '  , current.timestamp )
             print('Hash:  ' , current.hash)
-            if current.previous_hash:
-                print('Previous Hash:  ' , current.previous_hash.hash , '\n')
+            if current.prev:
+                print('Previous Hash:  ' , current.previous_hash , '\n')
             else:
                 print('Previous Hash: None  \n')
-            current = current.previous_hash
+            current = current.prev
 
 # Test 1 - Creation of Block and Hash
 print('Test 1 - Creation of Block and Hash')
@@ -64,10 +66,10 @@ print('Results should have three blocks:')
 bc.print()
 
 assert(bc.tail.data == 'block 3')
-assert(bc.tail.previous_hash.data == 'block 2')
-assert(bc.tail.previous_hash.previous_hash.data == 'block 1')
+assert(bc.tail.prev.data == 'block 2')
+assert(bc.tail.prev.prev.data == 'block 1')
 
 # Test 3 - Check last block has none previous hash
 print('Test 3 - Check last block has none previous hash')
-block1 = bc.tail.previous_hash.previous_hash
+block1 = bc.tail.prev.prev
 assert(block1.previous_hash == None)

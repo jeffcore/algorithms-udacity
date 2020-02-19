@@ -31,7 +31,10 @@ def is_user_in_group(user, group):
     """
     if user == None or group == None:
         return False
-    
+
+    if not isinstance(group, Group):    
+        return False
+
     # print(f'grpup get users {group.get_users()}')
     if user in group.get_users():
         # print(f'u {u} user {user}')
@@ -97,3 +100,15 @@ child_user = "sub_child_user"
 parent.add_user(child_user)
 print(f'should return False - Result: {is_user_in_group(None, parent)}')
 assert(False == is_user_in_group(None, parent))
+
+# Test 5 - child provided as group provided to is_user_in_group()
+print('Test 4 - None child provided is_user_in_group()')
+parent = Group("parent")
+child_user = "sub_child_user"
+parent.add_user(child_user)
+
+print(is_user_in_group(sub_child_user, sub_child_user))
+print(f'should return False - Result: {is_user_in_group(sub_child_user, sub_child_user)}')
+assert(False == is_user_in_group(sub_child_user, sub_child_user))
+
+

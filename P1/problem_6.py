@@ -80,14 +80,15 @@ def intersection(llist_1, llist_2):
         return None
 
     set_llist_1 = llist_1.to_set()
-    set_llist_2 = llist_2.to_set()
 
-    intersection_set = set_llist_1.intersection(set_llist_2)
     new_linked_list = LinkedList()
-
-    while len(intersection_set):
-        new_linked_list.append(intersection_set.pop())
-
+    current = llist_2.head
+    while current:
+        if current.value in set_llist_1:   
+            set_llist_1.remove(current.value)             
+            new_linked_list.append(current)
+        current = current.next
+    
     return new_linked_list
 
 
@@ -122,8 +123,8 @@ for i in element_1:
 for i in element_2:
     linked_list_2.append(i)
 
-print(f'Intersection of lists should be 4 -> 21 -> 6 code results {intersection(linked_list_1,linked_list_2)}')
-assert('4 -> 21 -> 6' == str(intersection(linked_list_1,linked_list_2)))
+print(f'Intersection of lists should be 6 -> 4 -> 21 code results {intersection(linked_list_1,linked_list_2)}')
+assert('6 -> 4 -> 21' == str(intersection(linked_list_1,linked_list_2)))
 
 # Test case 3 - Linked list Blank
 print('Test 3 - Linked list Blank')

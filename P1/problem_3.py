@@ -1,5 +1,6 @@
 ### huffman encoding ###
 import sys
+import heapq
 from collections import deque
 
 def huffman_encoding(data):
@@ -7,47 +8,37 @@ def huffman_encoding(data):
         return 0, None
 
     # get sorted character frequencies as list of tuples 
-    freq = get_frequencies(data)
+    freq_heap = get_frequencies(data)
     
     # build tree with only one item in frequency list
-    if len(freq) == 1:
-        character, value = freq.pop(0)
-        tree = Tree(Node(value, None))
-        tree.root.left = Node(value, character)
-        bits = '0' * value
+    if len(freq_heap) == 1:
+        item = heapq.heappop(freq_heap)
+        new_node = Node(item.value)
+        new_node.left = item
+        tree = Tree(new_node)       
+        bits = '0' * item.value
         return bits, tree
 
     # build tree
-    while len(freq) > 1:
-        item1, item1_value = freq.pop(0)
-        item2, item2_value = freq.pop(0)
-        new_node_value = item1_value + item2_value
-        new_node = Node(new_node_value)
-
-        #  build sub tree - check if any popped items are nodes
-        if isinstance(item1, Node):           
-            new_node.left = item1        
-        else:            
-            new_node.left = Node(item1_value, item1)
+    while len(freq_heap) > 1:
+        item1 = heapq.heappop(freq_heap)
+        item2 = heapq.heappop(freq_heap)
+        new_node_value = item1.value + item2.value
         
-        if isinstance(item2, Node):            
-            new_node.right = item2        
-        else:
-            new_node.right = Node(item2_value, item2)
-
-        # find position to insert new sub tree based on value
-        idx = len(freq)
-        for i, f in enumerate(freq):                       
-            if f[1] > new_node_value:
-                idx = i
-                break
-                
-        freq.insert(idx, (new_node, new_node_value))
+        #  build sub tree 
+        new_node = Node(new_node_value)
+        new_node.left = item1        
+        new_node.right = item2        
+        
+        heapq.heappush(freq_heap, new_node)
 
     # assign first element in frequencies to tree
-    huffman_tree = Tree(freq[0][0])  
+    top_node = heapq.heappop(freq_heap)
+    huffman_tree = Tree(top_node)  
+
     # get map of bits to characters in tree  
     encoding_map = huffman_encoder_map(huffman_tree.root)
+    
     # take encoder map to build bit string
     the_bits = huffman_string_to_bits(encoding_map, data)
 
@@ -103,9 +94,12 @@ def get_frequencies(data):
     # sort frequencies
     freq = {k: v for k, v in sorted(freq.items(), key=lambda item: item[1])}  
     # convert freqeunciies to list of tuples
-    freq_list = [(k, v) for k, v in freq.items()] 
-
-    return freq_list
+    freq_heap = []
+    for k, v in freq.items():
+        heapq.heappush(freq_heap, Node(v, k))
+    
+    
+    return freq_heap
 
 class Node():
     def __init__(self, value, character = None):
@@ -132,19 +126,27 @@ class Node():
     def get_right_child(self):
         return self.right
 
+    def __lt__ (self, other):
+        return self.value < other.value
+    
+    def __gt__ (self, other):
+        return self.value > other.value
+
+
+
 class Tree:
     def __init__(self, root):
         self.root = root
 
 # Test 1 - Entire process works
 print('Test 1 - Entire process works')
-a_great_sentence = "The bird is the word"
+a_great_sentence = 'The quick brown fox jumps over the lazy dog'
 encoded_data, tree = huffman_encoding(a_great_sentence)
-print(f'encoded data: {encoded_data} - should equal: 0110111011111100111000001010110000100011010011110111111010101011001010')
-assert(encoded_data == '0110111011111100111000001010110000100011010011110111111010101011001010')
+print(f'encoded data: {encoded_data} - should equal: 11010001111010001100001110111010111111111000100110111011010111100101001100010001011111100001000011101111001111000110110001011110011101001100001011011110100001010100100100111111000111101101110001')
+assert(encoded_data == '11010001111010001100001110111010111111111000100110111011010111100101001100010001011111100001000011101111001111000110110001011110011101001100001011011110100001010100100100111111000111101101110001')
 decoded_data = huffman_decoding(encoded_data, tree)
-print(f'decoded data: {decoded_data} - should equal: The bird is the word')
-assert(decoded_data == "The bird is the word")
+print(f'decoded data: {decoded_data} - should equal: The quick brown fox jumps over the lazy dog')
+assert(decoded_data == 'The quick brown fox jumps over the lazy dog')
 
 # Test 2 - blank arguments
 print('Test 2 - Blank arguments')

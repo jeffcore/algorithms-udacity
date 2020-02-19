@@ -73,14 +73,17 @@ class LRU_Cache:
         if key == None:
             return
 
-        if len(self.cache) == self.capacity:            
-            node_pop = self.link_list.get_tail()
-            self.link_list.remove(node_pop)
-            del self.cache[node_pop.key]
+        if key in self.cache:
+            self.cache[key].value = value
+        else:
+            if len(self.cache) == self.capacity:            
+                node_pop = self.link_list.get_tail()
+                self.link_list.remove(node_pop)
+                del self.cache[node_pop.key]
 
-        node =  Node(key, value)
-        self.cache[key] = node    
-        self.link_list.add(node)
+            node =  Node(key, value)
+            self.cache[key] = node    
+            self.link_list.add(node)
 
 # Test 1 DoublyLinkedList
 print('Test 1 : Doubly Linked List')
@@ -126,3 +129,12 @@ our_cache.set(5, 1)
 our_cache.set(None, 1)
 print(f'Link list should be: 1 Result: {our_cache.link_list}')
 assert(str(our_cache.link_list)== '1')
+
+
+# Test 4
+print('Test 4 : Change value of existing key')
+our_cache = LRU_Cache(5)
+our_cache.set(1, 2)
+our_cache.set(1, 1)
+print(f'Link list should be: 1 Result: {our_cache.link_list}')
+assert(str(our_cache.link_list)=='1')

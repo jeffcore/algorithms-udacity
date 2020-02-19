@@ -35,6 +35,9 @@ def find_files_recursive(suffix, path):
     Returns:
        a list of paths
     """   
+    if suffix == "":
+        return []
+    
     result = []
     path_items = os.listdir(path)   
     for item in path_items:     
@@ -66,8 +69,8 @@ solution = []
 print(f'solution is: {solution} result: {find_files(".c","testdir_wrong")}')
 assert(find_files('.c','testdir_wrong') == solution), 'Did not work - Incorrect Start Directory'
 
-# Test 3 - Find Different File Extension .h
-print('Test 3 - Find Different File Extension .h')
-solution = ['./testdir/subdir3/subsubdir1/b.h', './testdir/subdir5/a.h', './testdir/t1.h', './testdir/subdir1/a.h']
-print(f'solution is: {solution} \n result: {find_files(".h","testdir")}')
-assert(test_results(solution, find_files('.h','testdir')) == True), 'Did not work - Find Different File Extension .h'
+# Test 3 - Empty suffix
+print('Test 3 - Empty suffix')
+solution = []
+print(f'solution is: {solution}  result: {find_files("","testdir")}')
+assert(solution == find_files("","testdir")), 'Did not work - Find Different File Extension .h'
