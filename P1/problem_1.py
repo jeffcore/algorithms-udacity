@@ -73,8 +73,9 @@ class LRU_Cache:
         if key == None:
             return
 
-        if key in self.cache:
+        if key in self.cache:            
             self.cache[key].value = value
+            self.get(key)
         else:
             if len(self.cache) == self.capacity:            
                 node_pop = self.link_list.get_tail()

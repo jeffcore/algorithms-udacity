@@ -34,5 +34,6 @@ Overall Complexity: O(n log n)
 4. Dictionary to encode the character to bits map. Space Complexity O(n) - n is the number of elements frequency dictionary
 
 ### Decoding
+1. Output string will be O(n) - n is the number of charaters in string
 No data structures are created during the decoding process. It uses the existing huffman tree and encoded data.
 
