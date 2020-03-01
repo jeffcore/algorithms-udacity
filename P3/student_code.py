@@ -38,45 +38,42 @@ class PriorityQueue:
         return ' '.join(str(self.heap))
 
     
-def distance(current, goal):
+def distance(current, target):
     current_x, current_y = current
-    goal_x, goal_y = goal
-    return math.sqrt((current_x - goal_x)**2 + (current_y - goal_y)**2) 
-
+    target_x, target_y = target
+    return math.sqrt((current_x - target_x)**2 + (current_y - target_y)**2) 
 
 def shortest_path(M,start,goal):
     print("shortest path called")
 
     frontier = PriorityQueue()
     explored = set()
-    
-    
+        
     if start == goal:
         return [start]
     
     frontier.push((start, [start], 0), 0)
     
     while not frontier.isEmpty():
-        node, actions, priority = frontier.pop()
+        node, path, g_score = frontier.pop()
     
         if node not in explored:
             explored.add(node)
             
             if node == goal:                
-                return actions
+                return path
             
             for child_node in M.roads[node]:                                
-                new_action = actions + [child_node]
+                new_path = path + [child_node]
                 
-                path_cost = distance(M.intersections[node], M.intersections[child_node])                
+                step_distance = distance(M.intersections[node], M.intersections[child_node])                
                 goal_cost = distance(M.intersections[child_node], M.intersections[goal])                
-                new_cost = path_cost + priority
-                a_cost = new_cost + goal_cost
+                new_g_score = step_distance + g_score
+                f_cost = new_g_score + goal_cost
                 
-                frontier.push((child_node, new_action, new_cost), a_cost)
+                frontier.push((child_node, new_path, new_g_score), f_cost)
             
     return None
-
 
 
 # Citations

@@ -7,7 +7,7 @@ There is a clear and accurate statement of efficiency. There is an explanation t
 Code Design
 
 Explanation contains some discussion of design choices made in the code. Some examples include the choice of algorithm and data structure.
-# Problem 5
+# Problem 5 - Autocomplete with Tries
 
 ## Decisions Behind Code
 
