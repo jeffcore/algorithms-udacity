@@ -12,9 +12,9 @@ The mergesort algorithm takes O(n log n) time - n for the number of elements in 
 
 ### Space Complexity
 
-The space complexity of mergsort is auxiliary space O(n) and constant space O(n) = O(2n)
-The space complexity for the new numbers is O(1).
-Total space compexity = O(2n+1)
+The space complexity of mergesort is auxiliary space O(n+3) and constant space O(n) = O(2n) with n being the number of elements in array and 3 being the new variable created.
+The space complexity for the new numbers is O(2).
+Total space compexity = O(2n + 5) simplifies to O(n)
 
 Citations:
 Found the trick for building the two max numbers. https://www.techiedelight.com/find-two-numbers-maximum-sum-array-digits/     

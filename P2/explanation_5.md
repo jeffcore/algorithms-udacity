@@ -10,7 +10,6 @@ I used a resursive algoritm to find all the suffixes. The function builds each s
 
 The time complexity to find the search term is O(n \* m) n being total number of words and m being average length of words. The time complexity to find the suffixes O(n\*m) n being total number of words and m being average length of words. Total time complexity of O(2(n \* m)) -> O(n \* m)
 
-
 ### Space Complexity
 
-The overall trie space is O(n \* m) n being total number of words and m being average length of words. The suffix auxilary space for the returned list is O(n \* m) n being total number of words and m being average length of words in the suffixes. The total space complexity is O(2(n + m))
+The overall trie space is O(n \* m) n being total number of words and m being average length of words. The suffix auxilary space for the returned list is O(n \* m) n being total number of words and m being average length of words in the suffixes. The total space complexity is O(2(n + m)) simplified to O(n+m)

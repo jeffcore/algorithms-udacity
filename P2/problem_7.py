@@ -107,5 +107,5 @@ print("/blog/top - ", router.lookup("/blog/top"))  # should print 'top handler' 
 
 # empty node
 router = Router("") 
-print(router.lookup("/home"))   # none
+print("/home - ", router.lookup("/home"))   # none
 

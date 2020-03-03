@@ -25,8 +25,7 @@ def sqrt(number):
    if number < 0:
       number = abs(number)
    
-   if number == 0 or number == 1 :
-      print(number)
+   if number == 0 or number == 1 :      
       return number
    
    start_num = 1
@@ -37,8 +36,7 @@ def sqrt(number):
 
       mid_sqr = mid * mid
 
-      if mid_sqr == number:
-         print(mid)
+      if mid_sqr == number:         
          return mid
 
       if mid_sqr < number:
@@ -46,8 +44,7 @@ def sqrt(number):
          ans = mid
       else:
          end_num = mid - 1
-      
-   print(ans)
+   
    return ans
 
 print('Test Batch 1')
