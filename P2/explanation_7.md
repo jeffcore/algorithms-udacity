@@ -1,20 +1,14 @@
-Your paragraph should not be a detailed walkthrough of the code you provided, but provide your reasoning behind decisions made in the code. For example, why did you use that data structure? You also need to explain the efficiency (time and space) of your solution.
-
-Efficiency
-
-There is a clear and accurate statement of efficiency. There is an explanation that specifically mentions parts of the code that contribute to the overall efficiency.
-
-Code Design
-
-Explanation contains some discussion of design choices made in the code. Some examples include the choice of algorithm and data structure.
-
-# Problem 7
+# Problem 5 - Autocomplete with Tries
 
 ## Decisions Behind Code
-
+The starter code clearly suggested that we use a Trie data structure :)
 
 ## Efficiency
 
 ### Time Complexity
 
-### Space Complexity 
+Insert time complexity of  O(n) n being total number of paths/nodes in trie. The time complexity to find the final path is O(n) n being total number of paths/nodes in trie. The time complexity to find the suffixes is  O(n) n being total number of paths/nodes in trie. Total time complexity of O(2n) -> O(n)
+
+### Space Complexity
+
+The overall trie space is O(n) n total path/nodes in the trie. The suffix auxilary space for the returned list is O(m) m being the total number of suffixes found. The total space complexity is O(n + m)

@@ -1,19 +1,13 @@
-Your paragraph should not be a detailed walkthrough of the code you provided, but provide your reasoning behind decisions made in the code. For example, why did you use that data structure? You also need to explain the efficiency (time and space) of your solution.
-
-Efficiency
-
-There is a clear and accurate statement of efficiency. There is an explanation that specifically mentions parts of the code that contribute to the overall efficiency.
-
-Code Design
-
-Explanation contains some discussion of design choices made in the code. Some examples include the choice of algorithm and data structure.
 # Problem 4
 
 ## Decisions Behind Code
-
+Just a simple loop through the list and moving the 0 to the beginning and 2 to the end of the list.
 
 ## Efficiency
 
 ### Time Complexity
+O(n) - Linear loop through list O(n) -  n being the number of elements in list.
 
-### Space Complexity 
+### Space Complexity
+
+Constant space of O(n) - n being the number of elements in list. Auxilary space of O(1) for start and end variables.  Final space complexity of O(n)

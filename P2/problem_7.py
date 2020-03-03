@@ -68,8 +68,11 @@ class Router:
         # return the "not found" handler if you added one
         # bonus points if a path works with and without a trailing slash
         # e.g. /about and /about/ both return the /about handler
-        
-        return self.route_trie.find(self.split_path(path))
+        result =  self.route_trie.find(self.split_path(path))
+        if result:
+            return result
+        else:
+            return self.not_found_handler
 
     def split_path(self, path):
         # you need to split the path into parts for 
@@ -84,10 +87,25 @@ class Router:
 # create the router and add a route
 router = Router("root handler", "not found handler") # remove the 'not found handler' if you did not implement this
 router.add_handler("/home/about", "about handler")  # add a route
-
+router.add_handler("/blog/article/hello", "hello handler") 
+router.add_handler("/blog/article/hello2", "hello2 handler") 
+router.add_handler("/blog/top", "top handler") 
 # some lookups with the expected output
-print(router.lookup("/")) # should print 'root handler'
-print(router.lookup("/home")) # should print 'not found handler' or None if you did not implement one
-print(router.lookup("/home/about")) # should print 'about handler'
-print(router.lookup("/home/about/")) # should print 'about handler' or None if you did not handle trailing slashes
-print(router.lookup("/home/about/me")) # should print 'not found handler' or None if you did not implement one
+print("/ - ", router.lookup("/")) # should print 'root handler'
+print("/home - ", router.lookup("/home")) # should print 'not found handler' or None if you did not implement one
+print("/home/about - ", router.lookup("/home/about")) # should print 'about handler'
+print("/home/about/ - ", router.lookup("/home/about/")) # should print 'about handler' or None if you did not handle trailing slashes
+print("/home/about/me - ", router.lookup("/home/about/me")) # should print 'not found handler' or None if you did not implement one
+
+## test of second route
+print("/blog/article/hello - ", router.lookup("/blog/article/hello")) # should print 'hello handler' or None if you did not implement one
+print("/blog/article/hello2 - ", router.lookup("/blog/article/hello2")) # should print 'hello2 handler' or None if you did not implement one
+print("/blog/article/hello4 - ", router.lookup("/blog/article/hello4")) # should print 'not found handler' or None if you did not implement one
+
+## two folders within route
+print("/blog/top - ", router.lookup("/blog/top"))  # should print 'top handler' or None if you did not implement one
+
+# empty node
+router = Router("") 
+print(router.lookup("/home"))   # none
+

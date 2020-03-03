@@ -1,19 +1,16 @@
-Your paragraph should not be a detailed walkthrough of the code you provided, but provide your reasoning behind decisions made in the code. For example, why did you use that data structure? You also need to explain the efficiency (time and space) of your solution.
-
-Efficiency
-
-There is a clear and accurate statement of efficiency. There is an explanation that specifically mentions parts of the code that contribute to the overall efficiency.
-
-Code Design
-
-Explanation contains some discussion of design choices made in the code. Some examples include the choice of algorithm and data structure.
 # Problem 5 - Autocomplete with Tries
 
 ## Decisions Behind Code
 
+I used a resursive algoritm to find all the suffixes. The function builds each suffix before recusive call then build list of suffix when the stack is returned. The underlying data structure is a tree and a recursive algorithm is the best method to traverse a tree.
 
 ## Efficiency
 
 ### Time Complexity
 
-### Space Complexity 
+The time complexity to find the search term is O(n \* m) n being total number of words and m being average length of words. The time complexity to find the suffixes O(n\*m) n being total number of words and m being average length of words. Total time complexity of O(2(n \* m)) -> O(n \* m)
+
+
+### Space Complexity
+
+The overall trie space is O(n \* m) n being total number of words and m being average length of words. The suffix auxilary space for the returned list is O(n \* m) n being total number of words and m being average length of words in the suffixes. The total space complexity is O(2(n + m))

@@ -14,11 +14,6 @@ scenarios such as these when there are more than one possible answers, return an
 Here is some boilerplate code and test cases to start with:
 """
 
-# merge sort 
-# add odd to first number
-# add even to second number
-
-
 def mergesort(items):
     if len(items) <= 1:
         return items
@@ -50,8 +45,6 @@ def merge(left, right):
         
     return merged
 
-
-
 def rearrange_digits(input_list):
     """
     Rearrange Array Elements so as to form two number such that their sum is maximum.
@@ -61,8 +54,16 @@ def rearrange_digits(input_list):
     Returns:
        (int),(int): Two maximum sums
     """
+    
+    if input_list == None or len(input_list) <= 0:
+        return None
+
+    elif len(input_list) == 1:
+        return input_list
+
     sorted_list = mergesort(input_list)
     
+
     num_one = 0
     num_two = 0
     for i in range(len(sorted_list)):
@@ -70,7 +71,7 @@ def rearrange_digits(input_list):
             num_two = num_two * 10 + sorted_list[i] 
         else:             
             num_one = num_one * 10 + sorted_list[i] 
-    print(f'number 1 : {num_one} number 2: {num_two}')
+    # print(f'number 1 : {num_one} number 2: {num_two}')
 
     return num_one, num_two
 
@@ -85,3 +86,13 @@ def test_function(test_case):
 
 test_function([[1, 2, 3, 4, 5], [542, 31]])
 test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
+test_function([[9,8,7,6,5,4,3,2,1], [97531, 8642]])
+test_function([[3, 4], [4, 3]])
+test_function([[3], [3]])
+
+print('Pass' if rearrange_digits(None) == None else 'fail')
+print('Pass' if rearrange_digits([]) == None else 'fail')
+
+
+
+

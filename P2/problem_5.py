@@ -17,12 +17,10 @@ class TrieNode:
         if self.is_word:
             suf_list.append(suffix)
                 
-        for char in self.children:
-            print(char)
+        for char in self.children:            
             new_suffix = suffix + char
             results = self.children[char].suffixes(new_suffix)
-          
-            print('results ' , results)
+                      
             suf_list.extend(results)
         
         return suf_list
@@ -65,3 +63,8 @@ for word in wordList:
     
 prefixNode = MyTrie.find("a")
 print(prefixNode.suffixes())
+
+
+print(MyTrie.find('trig').suffixes()) ## ger, onometry
+print(MyTrie.find('y')) ## False
+print(MyTrie.find('antagon').suffixes()) ## ist
