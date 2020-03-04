@@ -63,7 +63,6 @@ def rearrange_digits(input_list):
 
     sorted_list = mergesort(input_list)
     
-
     num_one = 0
     num_two = 0
     for i in range(len(sorted_list)):
@@ -71,7 +70,6 @@ def rearrange_digits(input_list):
             num_two = num_two * 10 + sorted_list[i] 
         else:             
             num_one = num_one * 10 + sorted_list[i] 
-    # print(f'number 1 : {num_one} number 2: {num_two}')
 
     return num_one, num_two
 

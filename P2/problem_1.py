@@ -23,7 +23,7 @@ def sqrt(number):
    """
    
    if number < 0:
-      number = abs(number)
+       return None
    
    if number == 0 or number == 1 :      
       return number
@@ -66,7 +66,7 @@ print ("Pass" if  (15 == sqrt(238)) else "Fail")
 print ("Pass" if  (92 == sqrt(8568)) else "Fail")
 print ("Pass" if  (8 == sqrt(66)) else "Fail")
 print ("Pass" if  (81 == sqrt(6561)) else "Fail")
-print ("Pass" if  (5 == sqrt(-25)) else "Fail")
+print ("Pass" if  (None == sqrt(-25)) else "Fail")
 
 # References:
 # https://www.geeksforgeeks.org/find-square-root-number-upto-given-precision-using-binary-search/
