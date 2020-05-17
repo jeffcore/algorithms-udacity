@@ -19,7 +19,10 @@ def huffman_encoding(data):
         bits = '0' * item.value
         return bits, tree
 
-    # build tree
+    # build tree - this process creates a three node tree
+    # top node is combined frequency of child -child nodes are item1 and item2
+    # this new node is added back to heapq 
+    # this repeats until freq_heap has only one item - tree is built
     while len(freq_heap) > 1:
         item1 = heapq.heappop(freq_heap)
         item2 = heapq.heappop(freq_heap)
@@ -96,8 +99,7 @@ def get_frequencies(data):
     # convert freqeunciies to list of tuples
     freq_heap = []
     for k, v in freq.items():
-        heapq.heappush(freq_heap, Node(v, k))
-    
+        heapq.heappush(freq_heap, Node(v, k))    
     
     return freq_heap
 
