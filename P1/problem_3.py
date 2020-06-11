@@ -94,13 +94,13 @@ def get_frequencies(data):
         else:
             freq[c] = 1
 
-    # sort frequencies
-    freq = {k: v for k, v in sorted(freq.items(), key=lambda item: item[1])}  
     # convert freqeunciies to list of tuples
     freq_heap = []
+    # add character frequencies to priority queue
     for k, v in freq.items():
         heapq.heappush(freq_heap, Node(v, k))    
-    
+        x
+    print(freq_heap)
     return freq_heap
 
 class Node():
@@ -144,8 +144,8 @@ class Tree:
 print('Test 1 - Entire process works')
 a_great_sentence = 'The quick brown fox jumps over the lazy dog'
 encoded_data, tree = huffman_encoding(a_great_sentence)
-print(f'encoded data: {encoded_data} - should equal: 11010001111010001100001110111010111111111000100110111011010111100101001100010001011111100001000011101111001111000110110001011110011101001100001011011110100001010100100100111111000111101101110001')
-assert(encoded_data == '11010001111010001100001110111010111111111000100110111011010111100101001100010001011111100001000011101111001111000110110001011110011101001100001011011110100001010100100100111111000111101101110001')
+print(f'encoded data: {encoded_data} - should equal: 10010111101010000110010001001111001011001100011011101101011000010111000101111010101100001011011000011110111011111000010111111101011011001110101111010100011101111100011100111000100110101010110100')
+assert(encoded_data == '10010111101010000110010001001111001011001100011011101101011000010111000101111010101100001011011000011110111011111000010111111101011011001110101111010100011101111100011100111000100110101010110100')
 decoded_data = huffman_decoding(encoded_data, tree)
 print(f'decoded data: {decoded_data} - should equal: The quick brown fox jumps over the lazy dog')
 assert(decoded_data == 'The quick brown fox jumps over the lazy dog')
